@@ -7,30 +7,30 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/employee/{employeeId}")
+@RequestMapping(value = "/users/{userId}")
 @RequiredArgsConstructor
 public class PaymentController {
 
     private final PaymentService paymentService;
 
     @GetMapping(value = "/basic-payment")
-    public ResponseEntity<PaymentModel> getAndCalculateBasicSalary(@PathVariable String employeeId){
-        return ResponseEntity.ok(paymentService.getAndCalculateBasicSalary(employeeId));
+    public ResponseEntity<PaymentModel> getAndCalculateBasicSalary(@PathVariable String userId){
+        return ResponseEntity.ok(paymentService.getAndCalculateBasicSalary(userId));
     }
 
     @GetMapping(value = "/take-home-payment-requests")
-    public ResponseEntity<PaymentModel> getAndCalculateTakeHome(@PathVariable String employeeId){
-        return null;
+    public ResponseEntity<PaymentModel> getAndCalculateTakeHome(@PathVariable String userId){
+        return ResponseEntity.ok(paymentService.getAndCalculateTakeHome(userId));
     }
 
     @GetMapping(value = "/full-payment-requests")
-    public ResponseEntity<PaymentModel> getAndCalculateFullSalary(@PathVariable String employeeId){
-        return null;
+    public ResponseEntity<PaymentModel> getAndCalculateFullSalary(@PathVariable String userId){
+        return ResponseEntity.ok(paymentService.getAndCalculateFullSalary(userId));
     }
 
-    @PutMapping(value = "/basic-payment")
-    public ResponseEntity editBasicSalary(@PathVariable String employeeId, @RequestBody PaymentModel paymentModel){
-        paymentService.editBasicSalary(employeeId, paymentModel);
+    @PostMapping(value = "/basic-payment")
+    public ResponseEntity editBasicSalary(@PathVariable String userId, @RequestBody PaymentModel paymentModel){
+        paymentService.editBasicSalary(userId, paymentModel);
         return ResponseEntity.noContent().build();
     }
 
